@@ -1,3 +1,15 @@
 from django.shortcuts import render
-
+from django.views.generic import ListView
+from .models import *
 # Create your views here.
+
+
+class ProductListView(ListView):
+    template_name = "product/product-list.html"
+    model = Product
+    # paginate_by = 8
+
+    # def get_queryset(self):
+    #     return Product.objects.get_by_active()
+
+

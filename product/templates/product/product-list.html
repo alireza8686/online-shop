@@ -1,0 +1,12 @@
+{% extends 'base/main.html' %}
+
+
+{% block body %}
+{% for product in page_obj %}
+
+{{product.title}}
+
+{% endfor %}
+
+
+{% endblock body %}

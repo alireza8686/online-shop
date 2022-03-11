@@ -1,0 +1,23 @@
+{% load static %}
+
+<html>
+    <head>
+        {% include 'base/head-referenced.html' %}
+    </head>
+    <body>
+
+        <!--  Header -->
+        {% include 'base/header.html' %}
+        <!--  /Header -->
+
+        {% block body %}
+        
+        
+        {% endblock body %}
+
+        <!--  footer -->
+        {% include 'base/footer.html' %}
+        <!--  /footer -->
+
+    </body>
+
