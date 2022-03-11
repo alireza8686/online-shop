@@ -1,3 +1,4 @@
+from operator import truediv
 from django.db import models
 from django.contrib.auth.models import User
 from category.models import Category
@@ -6,7 +7,7 @@ from category.models import Category
 
 class Product(models.Model):
     TYPE = (("جدید", "بله"), (" ", "خیر"))
-    title: models.CharField(max_length=200, verbose_name="عنوان محصول")
+    title = models.CharField(max_length=200, verbose_name="عنوان محصول",default="")
     description = models.TextField(verbose_name="توضیحات محصول")
     price = models.IntegerField(default="1000", blank=True, null=True, verbose_name="قیمت")
     product_size = models.CharField(max_length=500, verbose_name="سایز محصول")
