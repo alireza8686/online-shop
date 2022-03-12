@@ -1,3 +1,4 @@
+from multiprocessing import context
 from django.shortcuts import render
 from django.views.generic import ListView
 from .models import *
@@ -13,3 +14,11 @@ class ProductListView(ListView):
         return Product.objects.product_are_active()
 
 
+def product_detail(request,pk):
+    product = Product.objects.get(id=pk)
+    product.view += 1
+    product.save()
+    context = {
+        'product' : product,
+    }
+    return render(request,'product/product-detail.html',context)
