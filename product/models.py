@@ -5,6 +5,10 @@ from category.models import Category
 # Create your models here.
 
 
+class ProductManager(models.Manager):
+    def product_are_active(self):
+        return self.get_queryset().filter(active=True)
+
 class Product(models.Model):
     TYPE = (("جدید", "بله"), (" ", "خیر"))
     title = models.CharField(max_length=200, verbose_name="عنوان محصول",default="")
@@ -20,6 +24,8 @@ class Product(models.Model):
     active = models.BooleanField(default=False, verbose_name="موجود / ناموجود")
     view = models.IntegerField(default=0, verbose_name="تعداد بازدید")
 
+    #manager
+    objects = ProductManager()
 
     class Meta:
         verbose_name = "محصول"

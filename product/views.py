@@ -9,7 +9,7 @@ class ProductListView(ListView):
     model = Product
     paginate_by = 2
 
-    # def get_queryset(self):
-    #     return Product.objects.get_by_active()
+    def get_queryset(self):
+        return Product.objects.product_are_active()
 
 
