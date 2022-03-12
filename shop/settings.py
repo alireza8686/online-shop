@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     #apps_created
     'product',
     'category',
+    'blog',
 
 ]
 
