@@ -9,9 +9,8 @@
         <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
             <div class="col p-4 d-flex flex-column position-static">
                 <strong class="d-inline-block mb-2 text-primary">{{product.title}}</strong>
-                <h3 class="mb-0">Featured post</h3>
-                <div class="mb-1 text-muted">Nov 12</div>
-                <p class="card-text mb-auto">This is a wider card with supporting text below as a natural lead-in to additional content.</p>
+                <div class="mb-1 text-muted">{{product.price}}</div>
+                <p class="card-text mb-auto">{{product.description}}</p>
                 <a href="#" class="stretched-link">Continue reading</a>
             </div>
 
@@ -22,6 +21,24 @@
     </div>
     {% endfor %}
 </div>
+
+<!-- pagination -->
+<div class="pagination pagination-centered">
+    <ul>
+             {% if page_obj.has_previous %}
+                 <a class="btn btn-info" href="?page={{ page_obj.previous_page_number }}">قبلی</a>
+             {% endif %}
+
+            {% for num in paginator.page_range %}
+                <a class="border border-3" href="?page={{ num }}">{{ num }}</a>
+            {% endfor %}
+
+            {% if page_obj.has_next %}
+             <a class="btn btn-info" href="?page={{ page_obj.next_page_number }}">بعدی</a>
+            {% endif %}
+    </ul>
+</div>
+<!-- /pagination -->
 
 
 

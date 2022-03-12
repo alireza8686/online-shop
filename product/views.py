@@ -7,7 +7,7 @@ from .models import *
 class ProductListView(ListView):
     template_name = "product/product-list.html"
     model = Product
-    # paginate_by = 8
+    paginate_by = 2
 
     # def get_queryset(self):
     #     return Product.objects.get_by_active()
