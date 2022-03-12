@@ -10,7 +10,7 @@ from .models import *
 class ProductListView(ListView):
     template_name = "product/product-list.html"
     model = Product
-    paginate_by = 2
+    paginate_by = 4
 
     def get_queryset(self):
         return Product.objects.product_are_active()
@@ -46,14 +46,28 @@ def product_detail(request,pk):
     return render(request,'product/product-detail.html',context)
 
 
+class SpecialProducts(ListView):
+    template_name = "product/product-list.html"
+    model = Product
+    paginate_by = 4
 
-# class SpecialProducts(ListView):
-#     template_name = "product/product-list.html"
-#     model = Product
-#     # paginate_by = 8
+    def get_queryset(self):
+        return Product.objects.filter(special=True, active=True).all()
+
+class ProductNew(ListView):
+    template_name = "product/product-list.html"
+    model = Product
+    paginate_by = 4
+
+    def get_queryset(self):
+        return Product.objects.order_by("-id").all()
 
 
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         context['special_products'] = Product.objects.filter(special=True, active=True).all()
-#         return context
+
+class ProductMostPopular(ListView):
+    template_name = "product/product-list.html"
+    model = Product
+    paginate_by = 4
+
+    def get_queryset(self):
+        return Product.objects.order_by("-view").all()
