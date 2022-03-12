@@ -2,6 +2,7 @@ from operator import truediv
 from django.db import models
 from django.contrib.auth.models import User
 from category.models import Category
+from django.urls import reverse
 # Create your models here.
 
 
@@ -34,5 +35,21 @@ class Product(models.Model):
     def __str__(self):
         return self.title
 
-    def get_absolut_url(self):
-        return f"/products/{self.id}/{self.title.replace(' ', '-')}"
+    def get_absolute_url(self):
+        return reverse("product-detail", kwargs={"pk": self.pk})
+    
+
+
+class ProductComment(models.Model):
+    product = models.ForeignKey(Product, verbose_name="محصول", on_delete=models.CASCADE)
+    full_name = models.CharField(max_length=200, verbose_name="نام و نام خانوادگی")
+    email = models.EmailField(verbose_name="ایمیل")
+    text = models.TextField(verbose_name="متن نظر")
+    is_read = models.BooleanField(default=False, verbose_name="خوانده شده / نشده")
+
+    class Meta:
+        verbose_name = "نظر کاربران"
+        verbose_name_plural = "نطرات کاربران درباره محصولات"
+
+    def __str__(self):
+        return self.full_name
