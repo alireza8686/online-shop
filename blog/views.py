@@ -1,5 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.views.generic import ListView
+
+from blog.forms import BlogCommentForm
 from .models import *
 from django.http import Http404
 # Create your views here.
@@ -8,7 +10,7 @@ from django.http import Http404
 class BlogList(ListView):
     template_name = "blog/blog-list.html"
     model = Blog
-    paginate_by =1
+    paginate_by = 4
 
     def get_queryset(self):
         return Blog.objects.get_published()
@@ -24,32 +26,31 @@ class BlogList(ListView):
 def blog_detail(request, pk):
     # settings = Information.objects.first()
     blog = Blog.objects.get(id=pk)
-    # blog_form = CreateBlogForm(request.POST or None, initial={'blog_id': blog_id})
+    comment_form = BlogCommentForm(request.POST)
     if blog is None:
         raise Http404()
 
     blog.view += 1
     blog.save()
 
-    # if blog_form.is_valid():
-    #     full_name = blog_form.cleaned_data.get("full_name")
-    #     email = blog_form.cleaned_data.get("email")
-    #     text = blog_form.cleaned_data.get("text")
-    #     blogId = blog_form.cleaned_data.get("blog_id")
+    if comment_form.is_valid():
+        full_name = comment_form.cleaned_data.get("full_name")
+        email = comment_form.cleaned_data.get("email")
+        text = comment_form.cleaned_data.get("text")
+        blog = Blog.objects.get(id=pk)
 
-    #     blog = Blog.objects.get_by_id(blog_id=blogId)
+        new_comment = BlogComment.objects.create(full_name=full_name, email=email, text=text, blog=blog)
+        if new_comment is not None:
+            return redirect(f"/blog/{blog.id}/")
+    else:
+        comment_form = BlogCommentForm()
 
-    #     new_comment = BlogForm.objects.create(full_name=full_name, email=email, text=text, blogId=blog.id)
-    #     if new_comment is not None:
-    #         return redirect(f"/blog/{blog.id}/{blog.title}")
-    #     blog_form = CreateBlogForm()
-
-    # comments = BlogForm.objects.filter(blogId=blog_id, is_read=True)
+    comments = BlogComment.objects.filter(blog=blog, is_read=True)
 
     context = {
         "blog": blog,
         # "setting": settings,
-        # "blog_form": blog_form,
-        # "comments": comments
+        "comment_form": comment_form,
+        "comments": comments
     }
     return render(request, "blog/blog-detail.html", context)

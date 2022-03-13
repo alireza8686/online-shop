@@ -19,21 +19,9 @@
       <div class="mb-5">
       </div>
   
-      <hr>
   
-      <div class="row g-5">
-        <h3>محصولات مرتبط:</h3>
-        {% for product in related_product %}
-        <div class="col-md-6 border">
-          <h4><a href="{{product.get_absolut_url}}">{{product.title}}</a></h4>
-          <p>{{product.description}}</p>
-          <ul class="icon-list">
-            <li>{{product.price}}تومن</li>
-            <li class="text-muted">برند:{{product.brand}}</li>
-          </ul>
-        </div>
-        {% endfor %}
-      </div>
+  
+  
 
     </main>
     <footer class="pt-5 my-5 text-muted border-top">
