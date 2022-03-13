@@ -1,0 +1,57 @@
+{% extends 'base/main.html' %}
+
+
+
+{% block body %}
+
+<div class="col-lg-8 mx-auto p-3 py-md-5" dir="rtl">
+  
+    <main>
+      <h1>{{product.title}}</h1>
+      <p class="fs-5 col-md-8">{{product.description}}</p>
+      
+      قیمت: <span>{{product.price}}</span>
+      <br><br>
+      سایز:{{product.product_size}}
+      <br><br>
+      رنگ:{{product.color}}
+      <br><br>
+      برند:{{product.brand}}
+      <br><br>
+      بازدید:{{product.view}}
+      <br><br>
+      <div class="mb-5">
+        <a href="" class="btn btn-primary btn-lg px-4">افزودن به سبد خرید</a>
+      </div>
+  
+      <hr>
+  
+      <div class="row g-5">
+        <h3>محصولات مرتبط:</h3>
+        {% for product in related_product %}
+        <div class="col-md-6 border">
+          <h4><a href="{{product.get_absolut_url}}">{{product.title}}</a></h4>
+          <p>{{product.description}}</p>
+          <ul class="icon-list">
+            <li>{{product.price}}تومن</li>
+            <li class="text-muted">برند:{{product.brand}}</li>
+          </ul>
+        </div>
+        {% endfor %}
+      </div>
+
+    </main>
+    <footer class="pt-5 my-5 text-muted border-top">
+      <form method="POST">
+        {% csrf_token %}
+        {{comment_form.as_p}}
+        <input type="submit" value="ایجاد نظر">
+      </form>
+      <p dir="rtl">نظرات:</p>
+      {% for comment in comments %}
+        {{comment.full_name}}:{{comment.text}}<br>
+      {% endfor %}
+    </footer>
+  </div>
+
+{% endblock body %}

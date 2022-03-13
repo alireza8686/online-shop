@@ -1,7 +1,11 @@
 from django.db import models
-
+from django.urls import reverse
 # Create your models here.
 
+
+class BlogManager(models.Manager):
+    def get_published(self):
+        return self.get_queryset().filter(is_published=True)
 
 class Blog(models.Model):
     title = models.CharField(max_length=200, verbose_name="عنوان")
@@ -12,7 +16,7 @@ class Blog(models.Model):
     is_published = models.BooleanField(default=False, verbose_name="منتشر شود / نشود")
     view = models.IntegerField(default=0, verbose_name="تعداد بازدید")
 
-    # objects = BlogManager()
+    objects = BlogManager()
 
     class Meta:
         verbose_name = "بلاگ"
@@ -21,8 +25,9 @@ class Blog(models.Model):
     def __str__(self):
         return self.title
 
-    def get_absolut_blog_url(self):
-        return f'/blog/{self.id}/{self.title}'
+    def get_absolute_url(self):
+        return reverse("blog-detail", args={self.pk})
+    
     
     
     
