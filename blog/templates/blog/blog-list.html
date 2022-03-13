@@ -1,0 +1,62 @@
+{% extends 'base/main.html' %}
+
+
+{% block body %}
+<br>
+<div class="row mb-2">
+    {% for blog in object_list %}
+    <div class="col-md-6">
+        <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+            <div class="col p-4 d-flex flex-column position-static">
+                <strong class="d-inline-block mb-2 text-primary"><a href="{{blog.get_absolut_url}}">{{blog.title}}</a></strong>
+                <div class="mb-1 text-muted">{{blog.author}}</div>
+                <p class="card-text mb-auto">{{blog.view}}</p>
+                <a href="{% url 'blog-detail' blog.id %}" class="stretched-link">Continue reading</a>
+            </div>
+
+            <div class="col-auto d-none d-lg-block">
+                <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<!-- pagination -->
+<div class="pagination pagination-centered">
+    <ul>
+             {% if page_obj.has_previous %}
+                 <a class="btn btn-info" href="?page={{ page_obj.previous_page_number }}">قبلی</a>
+             {% endif %}
+
+            {% for num in paginator.page_range %}
+                <a class="border border-3" href="?page={{ num }}">{{ num }}</a>
+            {% endfor %}
+
+            {% if page_obj.has_next %}
+             <a class="btn btn-info" href="?page={{ page_obj.next_page_number }}">بعدی</a>
+            {% endif %}
+    </ul>
+</div>
+<!-- /pagination -->
+
+<div class="row mb-2">
+    {% for product in special_products %}
+    <div class="col-md-6">
+        <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+            <div class="col p-4 d-flex flex-column position-static">
+                <strong class="d-inline-block mb-2 text-primary"><a href="{{product.get_absolut_url}}">{{product.title}}</a></strong>
+                <div class="mb-1 text-muted">{{product.price}}</div>
+                <p class="card-text mb-auto">{{product.description}}</p>
+                <a href="{% url 'product-detail' product.id %}" class="stretched-link">Continue reading</a>
+            </div>
+
+            <div class="col-auto d-none d-lg-block">
+                <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock body %}

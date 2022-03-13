@@ -28,7 +28,7 @@ def blog_detail(request, pk):
     if blog is None:
         raise Http404()
 
-    blog.blog_visit += 1
+    blog.view += 1
     blog.save()
 
     # if blog_form.is_valid():
