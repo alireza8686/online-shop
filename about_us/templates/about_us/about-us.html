@@ -3,11 +3,20 @@
 
 
 {% block body %}
-
+<br>
+درباره ما:
 <ul>
     {% for about in about_us %}
     <li>{{about.title}}</li>
     <p>{{about.description}}</p>
+    {% endfor %}
+</ul>
+<br>
+اعضای تیم:
+<ul>
+    {% for team in our_team %}
+    <li>{{team.full_name}}</li>
+    <p>{{team.description}}</p>
     {% endfor %}
 </ul>
 
