@@ -1,7 +1,6 @@
 from django.contrib import admin
-from .models import Information, WorkingHours
+from .models import SiteInformation
 # Register your models here.
 
 
-admin.site.register(Information)
-admin.site.register(WorkingHours)
+admin.site.register(SiteInformation)
