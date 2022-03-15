@@ -11,4 +11,4 @@ def site_information(request):
     context = {
         'setting' : setting,
     }
-    return render(request,'base/header.html',context)
+    return render(request,'home/home.html',context)
