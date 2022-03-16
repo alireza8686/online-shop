@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'settings',
     'social_media',
     'sliders',
+    'home',
 
 ]
 
