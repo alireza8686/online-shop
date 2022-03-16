@@ -7,7 +7,7 @@ from settings.models import SiteInformation
 
 
 def site_information(request):
-    setting = SiteInformation.objects.first()
+    setting = SiteInformation.objects.get(id=1)
     context = {
         'setting' : setting,
     }
