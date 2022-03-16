@@ -2,7 +2,13 @@
 
 
 {% block body %}
-
+<hr>
+شبکه های اجتماعی:
+<br>
+{% for object in objects %}
+    {{object.name}}<br>{{object.link}}<br>
+{% endfor %}
+<hr>
 <form method="POST">
     {% csrf_token %}
     {{form.as_p}}
