@@ -19,11 +19,13 @@ def login_view(request):
             login(request, user)
             return redirect("home")
         else:
+            login_form = LoginForm()
             context = {
-                'error' : 'نام کاربری یا رکز عبور اشتباه میباشد',
+                'error' : 'نام کاربری یا رمز عبور اشتباه میباشد',
+                "login_form": login_form,
             }
-            return render(request, "account/login.html", context)
+            return render(request, "account/login-page.html", context)
     context = {
         "login_form": login_form
     }
-    return render(request, "account/login.html", context)
+    return render(request, "account/login-page.html", context)
