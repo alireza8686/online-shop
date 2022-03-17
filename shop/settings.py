@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'social_media',
     'sliders',
     'home',
+    'account',
 
 ]
 
