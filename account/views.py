@@ -7,9 +7,6 @@ from .forms import *
 
 
 def login_view(request):
-    if request.user.is_authenticated:
-        redirect("home")
-
     login_form = LoginForm(request.POST)
     if login_form.is_valid():
         user_name = login_form.cleaned_data.get("user_name")
@@ -29,3 +26,23 @@ def login_view(request):
         "login_form": login_form
     }
     return render(request, "account/login-page.html", context)
+
+
+
+def register_view(request):
+
+    register_form = RegisterForm(request.POST)
+
+    if register_form.is_valid():
+        user_name = register_form.cleaned_data.get("username")
+        email = register_form.cleaned_data.get("email")
+        password = register_form.cleaned_data.get("password")
+        User.objects.create_user(username=user_name, email=email, password=password)
+        return redirect("/login")
+
+    context = {
+        "register_form": register_form
+    }
+    return render(request, "account/register-page.html", context)
+
+
