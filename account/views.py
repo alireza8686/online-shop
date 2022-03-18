@@ -46,3 +46,9 @@ def register_view(request):
     return render(request, "account/register-page.html", context)
 
 
+
+def log_out(request):
+    logout(request)
+    return redirect("/")
+
+
