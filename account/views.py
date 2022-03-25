@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from .forms import *
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -52,3 +53,11 @@ def log_out(request):
     return redirect("/")
 
 
+@login_required(login_url="/login")
+def user_panel(request):
+    user_id = request.user.id
+    user = User.objects.get(id=user_id)
+    context = {
+        "user": user
+    }
+    return render(request, "account/user-panel.html", context)
