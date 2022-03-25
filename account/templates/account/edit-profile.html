@@ -1,0 +1,11 @@
+{% extends 'base/main.html' %}
+
+{% block body %}
+{{error}}
+<form method="POST">
+    {% csrf_token %}
+    {{edit_profile.as_p}}
+    <input type="submit" value="ویریش">
+</form>
+
+{% endblock body %}

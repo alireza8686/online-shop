@@ -61,3 +61,23 @@ def user_panel(request):
         "user": user
     }
     return render(request, "account/user-panel.html", context)
+
+
+@login_required(login_url="login")
+def panel_edit(request):
+    user_id = request.user.id
+    user = User.objects.get(id=user_id)
+
+    edit_panel_form = EditPanelForm(request.POST,
+                                    initial={"first_name": user.first_name, "last_name": user.last_name
+                                             })
+    if edit_panel_form.is_valid():
+        first_name = edit_panel_form.cleaned_data.get("first_name")
+        last_name = edit_panel_form.cleaned_data.get("last_name")
+        user.first_name = first_name
+        user.last_name = last_name
+        user.save()
+    context = {
+        "edit_profile": edit_panel_form
+    }
+    return render(request, 'account/edit-profile.html', context)

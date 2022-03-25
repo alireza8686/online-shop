@@ -61,3 +61,33 @@ class RegisterForm(forms.Form):
         if password != re_password:
             raise forms.ValidationError("رمز های عبور مغایرت دارند")
         return password
+    
+    
+    
+class EditPanelForm(forms.Form):
+    first_name = forms.CharField(
+        widget=forms.TextInput(attrs={"placeholder": "لطفا نام   خود را وارد کنید"}),
+        label="نام  ",
+        validators=[
+            validators.MaxLengthValidator(150, "نام و نام خانوداگی نمیتواند بیشتر از 150 کاراکتر باشد")
+        ]
+    )
+    last_name = forms.CharField(
+        widget=forms.TextInput(attrs={"placeholder": "لطفا  نام خانوادگی خود را وارد کنید"}),
+        label=" نام خانوادگی ",
+        validators=[
+            validators.MaxLengthValidator(150, "نام و نام خانوداگی نمیتواند بیشتر از 150 کاراکتر باشد")
+        ]
+    )
+
+    phone = forms.CharField(
+        widget=forms.TextInput(attrs={"placeholder": "لطفا شماره تلفن خود را وارد کنید"}),
+        label="شماره تلفن ",
+        validators=[
+            validators.MaxLengthValidator(150, "شماره تلفن نمیتواند بیشتر از 15 کاراکتر باشد")
+        ]
+    )
+
+    address = forms.CharField(
+        widget=forms.Textarea(attrs={"placeholder": "لطفا آدرس خود را وارد کنید"}),
+    )
