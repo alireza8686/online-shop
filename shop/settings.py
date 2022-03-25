@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'sliders',
     'home',
     'account',
+    'order',
 
 ]
 
