@@ -53,7 +53,7 @@ def log_out(request):
     return redirect("/")
 
 
-@login_required(login_url="/login")
+@login_required(login_url="login")
 def user_panel(request):
     user_id = request.user.id
     user = User.objects.get(id=user_id)
