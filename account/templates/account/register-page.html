@@ -1,17 +1,10 @@
 {% extends 'base/main.html' %}
 
-
 {% block body %}
-<hr>
-شبکه های اجتماعی:
-<br>
-{% for object in objects %}
-    {{object.name}}<br>{{object.link}}<br>
-{% endfor %}
-<hr>
+{{error}}
 <form method="POST">
     {% csrf_token %}
-    {{form.as_p}}
+    {{register_form.as_p}}
     <input type="submit" value="ارسال">
 </form>
 

@@ -6,7 +6,7 @@
         </a>
 
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-          <li><a href="#" class="nav-link px-2 text-secondary">Home</a></li>
+          <li><a href="/" class="nav-link px-2 text-white">صفحه اصلی</a></li>
           <li><a href="{% url 'product-list' %}" class="nav-link px-2 text-white">محصولات</a></li>
           <li><a href="{% url 'blog-list' %}" class="nav-link px-2 text-white">مقالات</a></li>
           <li><a href="{% url 'contact' %}" class="nav-link px-2 text-white">ارتباط با ما</a></li>
@@ -18,8 +18,14 @@
         </form>
 
         <div class="text-end">
-          <button type="button" class="btn btn-outline-light me-2">Login</button>
-          <button type="button" class="btn btn-warning">Sign-up</button>
+          {% if user.is_authenticated %}
+          
+          <a href="{% url 'logout' %}"><button type="button" class="btn btn-outline-light me-2">خروج</button></a>
+          {% else %}
+          <a href="{% url 'login' %}"><button type="button" class="btn btn-outline-light me-2">ورود</button></a>
+          {% endif %}
+          
+          <a href="{% url 'register' %}"><button type="button" class="btn btn-warning">ثبت نام</button></a>
         </div>
       </div>
     </div>

@@ -1,11 +1,16 @@
+from msilib.schema import ListView
+from multiprocessing import context
+from pyexpat import model
 from django.shortcuts import redirect, render
+
+from social_media.models import SocialMedia
 from .forms import ContactForm
 from .models import Contact
 # Create your views here.
 
 
 def contact(request):
-    # settings = Information.objects.first()
+    objects = SocialMedia.objects.all()
     # working_hours = WorkingHours.objects.all()
     if request.method == 'POST':
         contact_form = ContactForm(request.POST)
@@ -22,7 +27,10 @@ def contact(request):
         contact_form = ContactForm()
         context = {
             "form": contact_form,
-            # "setting": settings,
+            'objects' : objects,
             # "working_hours": working_hours
         }
         return render(request, "contact/contact.html", context)
+
+
+
