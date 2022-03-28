@@ -23,8 +23,8 @@ class Card(models.Model):
         return amount
     
     
-class OrderDetail(models.Model):
-    order = models.ForeignKey(Card, on_delete=models.CASCADE, verbose_name="سبد خرید")
+class Order(models.Model):
+    card = models.ForeignKey(Card, on_delete=models.CASCADE, verbose_name="سبد خرید")
     product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name="محصول")
     price = models.IntegerField(verbose_name="قیمت")
     count = models.IntegerField(verbose_name="تعداد")

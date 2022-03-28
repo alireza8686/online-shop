@@ -1,0 +1,11 @@
+{% extends 'base/main.html' %}
+
+{% block body %}
+
+{% for order in order %}
+
+{{order.product}}
+
+{% endfor %}
+
+{% endblock body %}
