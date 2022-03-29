@@ -19,8 +19,14 @@ def create_order(request,product_id):
     order.count += 1
     order.save()
     order = Order.objects.filter(card=card)
+    return redirect('orders')
+
+
+@login_required(login_url="login")
+def order(request):
+    card = Card.objects.get(user=request.user)
+    orders = Order.objects.filter(card=card)
     context = {
-        'order' : order,
-        'card' : card,
+        'orders' : orders
     }
     return render(request,'order/card.html',context)
