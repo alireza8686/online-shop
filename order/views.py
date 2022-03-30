@@ -15,9 +15,12 @@ def create_order(request,product_id):
         card.save()
     id = product_id
     product = Product.objects.get(id=id)
-    order = Order.objects.create(card=card,product=product,price = product.price,count=1)
-    order.count += 1
-    order.save()
+    try:
+        order = Order.objects.get(card=card,product=product,price = product.price)
+    except:
+        order = Order.objects.create(card=card,product=product,price = product.price,count=0)
+        order.count += 1
+        order.save()
     order = Order.objects.filter(card=card)
     return redirect('orders')
 
@@ -30,3 +33,9 @@ def order(request):
         'orders' : orders
     }
     return render(request,'order/card.html',context)
+
+
+def delete_order(request,id):
+    order = Order.objects.filter(id=id)
+    order.delete()
+    return redirect('orders')

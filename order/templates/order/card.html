@@ -4,7 +4,7 @@
 
 {% for order in orders %}
 
-{{order.product}} <br>
+{{order.product}} --- {{order.count}} --- <a href="{% url 'delete' order.id %}">delete</a> <br>
 
 {% endfor %} 
 
