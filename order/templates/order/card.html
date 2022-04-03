@@ -3,10 +3,10 @@
 {% block body %}
 
 {% for order in orders %}
-
+{% if order.count != 0 %}
 {{order.product}} --- {{order.count}} --- <a href="{% url 'delete' order.id %}">delete</a> <br>
-
+{% endif %}
 {% endfor %} 
-
+{{price}}
 
 {% endblock body %}
